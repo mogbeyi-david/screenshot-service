@@ -1,6 +1,8 @@
 import express from 'express';
 const router = express.Router();
+import * as ScreenShotController from '../controller/screenshot';
 
-// Signup
-router.post('/signup', () => {});
+// snap website
+router.post('/snap', ScreenShotController.snapWebsite);
+
 export default router;
