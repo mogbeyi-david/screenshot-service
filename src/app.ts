@@ -4,10 +4,9 @@ import express from 'express';
 import { NextFunction, Response } from 'express';
 import morgan from 'morgan';
 import ResponseHandler from './util/response-handler';
+import { ExpressRequest } from './util/express';
 
 import user from './routes/user';
-
-
 
 const app = express();
 

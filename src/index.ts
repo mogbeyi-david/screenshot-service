@@ -4,5 +4,4 @@ import { logger } from './util/logger';
 
 app.listen(APP_PORT, () => {
   logger.info(`Lucky Shine App Started successfully on :${APP_PORT}\n`);
-  logger.info(`Visit http://localhost/api-docs/ for the API documentation`);
 });
