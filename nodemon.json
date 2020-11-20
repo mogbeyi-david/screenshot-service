@@ -1,0 +1,9 @@
+{
+  "execMap": {
+    "ts": "./node_modules/.bin/ts-node"
+  },
+  "watch": ["src/", ".env"],
+  "env": {
+    "TS_NODE_TRANSPILE_ONLY": true
+  }
+}

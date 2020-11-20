@@ -1,0 +1,1078 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "An application that implements the basic features of stack overflow",
+    "version": "1.0.0",
+    "title": "Softcom Take Home Test",
+    "contact": {
+      "email": "mogbeyidavid@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "name": "x-auth-token",
+      "in": "header"
+    }
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Create new user account",
+        "operationId": "create-user",
+        "description": "Creates a new user by taking the firstname, lastname, email and password",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "New User Account",
+            "description": "new user account to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get all users",
+        "operationId": "get-users",
+        "description": "Get all users",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/users/login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Login a user",
+        "operationId": "login",
+        "description": "Login to an existing user account",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Login a user",
+            "required": true,
+            "description": "Login using email and password",
+            "schema": {
+              "$ref": "#/definitions/UserLogin"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/users/forgot-password": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Recover forgotten password",
+        "operationId": "forgot-password",
+        "description": "Send registered email to receive instructions to reset password",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "email",
+            "required": true,
+            "description": "Account email",
+            "schema": {
+              "$ref": "#/definitions/UserEmail"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/users/reset-password": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Reset a user's password",
+        "operationId": "reset-password",
+        "description": "Reset a user's password",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "email",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "Password",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewUserpassword"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get one user",
+        "operationId": "get-user",
+        "description": "Get one user",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "update a user's details",
+        "operationId": "update-user",
+        "description": "Update an existing user account",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "api_key": [
+              "x-auth-token"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "update a user details",
+            "description": "User update details",
+            "schema": {
+              "$ref": "#/definitions/UpdateUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/questions": {
+      "post": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "Ask a new question",
+        "operationId": "create-question",
+        "description": "Ask a new question",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "api_key": [
+              "x-auth-token"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "question",
+            "description": "new question to be asked",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Question"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "Get all questions",
+        "operationId": "get-questions",
+        "description": "Get all questions",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/questions/{id}": {
+      "get": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "Get one question",
+        "operationId": "get-question",
+        "description": "Get one question",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "update a question",
+        "operationId": "update-question",
+        "description": "Update a question",
+        "consumes": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "api_key": [
+              "x-auth-token"
+            ]
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "update a question",
+            "description": "User update details",
+            "schema": {
+              "$ref": "#/definitions/UpdateQuestion"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/questions/{id}/vote": {
+      "put": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "Up vote or Down vote a question",
+        "operationId": "vote-question",
+        "description": "Up vote or Down vote a question",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "api_key": [
+              "x-auth-token"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "up",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/answers": {
+      "post": {
+        "tags": [
+          "Answers"
+        ],
+        "summary": "Answer a question",
+        "operationId": "answer-question",
+        "description": "Answer a question",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "api_key": [
+              "x-auth-token"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "answer",
+            "description": "answer to question",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Answer"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Answers"
+        ],
+        "summary": "Get all answers",
+        "operationId": "get-answers",
+        "description": "Get all answers",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/answers/question/{id}": {
+      "get": {
+        "tags": [
+          "Answers"
+        ],
+        "summary": "Get all answers for a question",
+        "operationId": "get-answers-for-question",
+        "description": "Get all answers for a question",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/answers/{id}/vote": {
+      "put": {
+        "tags": [
+          "Answers"
+        ],
+        "summary": "Up vote or Down vote an answer",
+        "operationId": "vote-answer",
+        "description": "Up vote or Down vote an answer",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "up",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "security": [
+          {
+            "api_key": [
+              "x-auth-token"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/answers/{id}": {
+      "get": {
+        "tags": [
+          "Answers"
+        ],
+        "summary": "Get one answer",
+        "operationId": "get-answer",
+        "description": "Get an answer",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Answers"
+        ],
+        "summary": "update an answer",
+        "operationId": "update-answer",
+        "description": "Update a answer",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "api_key": [
+              "x-auth-token"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "update an answer",
+            "description": "Update an answer",
+            "schema": {
+              "$ref": "#/definitions/UpdateAnswer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/subscriptions/question": {
+      "post": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "summary": "Subscribe to a question",
+        "operationId": "subscribe-question",
+        "description": "Subscribe to a question",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "api_key": [
+              "x-auth-token"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "question",
+            "description": "question to be subscribed to",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Question"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/subscriptions/question/{id}": {
+      "get": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "summary": "Get subscriptions for a question",
+        "operationId": "get-question-subscriptions",
+        "description": "Get subscriptions for a question",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "api_key": [
+              "x-auth-token"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Single question gotten successfully"
+          },
+          "400": {
+            "description": "Something is wrong with the request payload"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "500": {
+            "description": "Oops! Something went wrong"
+          }
+        }
+      }
+    },
+    "/search/user": {
+      "get": {
+        "tags": [
+          "Search"
+        ],
+        "summary": "Search for users",
+        "operationId": "search-user",
+        "description": "Search for users",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/search/question": {
+      "get": {
+        "tags": [
+          "Search"
+        ],
+        "summary": "Search for questions",
+        "operationId": "search-question",
+        "description": "Search for questions",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/search/answer": {
+      "get": {
+        "tags": [
+          "Search"
+        ],
+        "summary": "Search for answers",
+        "operationId": "search-answer",
+        "description": "Search for answers",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "required": [
+        "firstname",
+        "lastname",
+        "email",
+        "password"
+      ],
+      "properties": {
+        "email": {
+          "type": "string",
+          "uniqueItems": true,
+          "format": "email"
+        },
+        "password": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 30,
+          "format": "password"
+        },
+        "firstname": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        }
+      }
+    },
+    "UserEmail": {
+      "type": "object",
+      "required": [
+        "email"
+      ],
+      "properties": {
+        "email": {
+          "type": "string",
+          "uniqueItems": true,
+          "format": "email"
+        }
+      }
+    },
+    "UpdateUser": {
+      "type": "object",
+      "required": [
+        "firstname",
+        "lastname",
+        "email"
+      ],
+      "properties": {
+        "email": {
+          "type": "string",
+          "uniqueItems": true,
+          "format": "email"
+        },
+        "firstname": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "UserLogin": {
+      "type": "object",
+      "required": [
+        "email",
+        "password"
+      ],
+      "properties": {
+        "email": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "password": {
+          "type": "string",
+          "format": "password"
+        }
+      }
+    },
+    "NewUserpassword": {
+      "type": "object",
+      "required": [
+        "password",
+        "confirmPassword"
+      ],
+      "properties": {
+        "password": {
+          "type": "string",
+          "format": "password"
+        },
+        "confirmPassword": {
+          "type": "string",
+          "format": "password"
+        }
+      }
+    },
+    "Question": {
+      "type": "object",
+      "required": [
+        "question"
+      ],
+      "properties": {
+        "question": {
+          "type": "string"
+        }
+      }
+    },
+    "UpdateQuestion": {
+      "type": "object",
+      "required": [
+        "question"
+      ],
+      "properties": {
+        "question": {
+          "type": "string"
+        }
+      }
+    },
+    "Answer": {
+      "type": "object",
+      "required": [
+        "answer"
+      ],
+      "properties": {
+        "question": {
+          "type": "string"
+        },
+        "answer": {
+          "type": "string"
+        }
+      }
+    },
+    "UpdateAnswer": {
+      "type": "object",
+      "required": [
+        "answer"
+      ],
+      "properties": {
+        "answer": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "schemes": [
+    "http"
+  ],
+  "basePath": "/api/v1",
+  "host": "206.189.227.235"
+}
