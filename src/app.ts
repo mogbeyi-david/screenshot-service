@@ -6,7 +6,7 @@ import morgan from 'morgan';
 import ResponseHandler from './util/response-handler';
 import { ExpressRequest } from './util/express';
 
-import user from './routes/user';
+import screenshot from './routes/screenshot';
 
 const app = express();
 
@@ -15,7 +15,7 @@ app.use(cors());
 app.use(urlencoded({ extended: true }));
 app.use(json());
 
-app.use('/users', user);
+app.use('/screenshots', screenshot);
 
 // ROUTES
 app.get('/', async (req: ExpressRequest, res: Response) => {
