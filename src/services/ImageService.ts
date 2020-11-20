@@ -1,5 +1,6 @@
 import AwsS3Integration from '../integrations/aws-s3-integration';
 import { S3_BUCKET_NAME } from '../config/env';
+import { generateRandomString } from '../util/generate-random-string';
 
 class ImageService {
   public static async upload(
@@ -10,7 +11,7 @@ class ImageService {
     const awsResponse = await AwsS3Integration.uploadToBucket({
       Bucket: S3_BUCKET_NAME,
       Body: imageFile,
-      Key: name,
+      Key: `${name}-${generateRandomString()}`,
       ACL: 'public-read',
       ContentType: mimetype,
     });
