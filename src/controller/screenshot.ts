@@ -21,9 +21,12 @@ export async function snapWebsite(
 
   try {
     const screenshotIdentifier = generateRandomString();
-    // const result = await ScreenshotHelpers.snapWebsite(url);
-    // const link = await ImageService.upload(result, url);
-    return ResponseHandler.sendSuccessResponse({ res, data: { screenshotIdentifier } });
+    const screenshotData = { screenshotIdentifier, url };
+    RabbitmqService.publish(QUEUES.UPLOAD_SCREENSHOTS, screenshotData);
+    return ResponseHandler.sendSuccessResponse({
+      res,
+      data: { screenshotIdentifier },
+    });
   } catch (error) {
     return next(error);
   }

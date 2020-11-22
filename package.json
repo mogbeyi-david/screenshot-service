@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "amqplib": "^0.6.0",
     "app-root-path": "^3.0.0",
     "aws-sdk": "^2.796.0",
     "capture-website": "^1.2.4",
@@ -26,6 +27,7 @@
     "winston": "^3.3.3"
   },
   "devDependencies": {
+    "@types/amqplib": "^0.5.16",
     "@types/app-root-path": "^1.2.4",
     "@types/aws-sdk": "^2.7.0",
     "@types/cors": "^2.8.8",
