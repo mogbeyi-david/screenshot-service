@@ -19,16 +19,19 @@ export default async function uploadWebsiteScreenShots(): Promise<void> {
       async (messageData: any) => {
         try {
           const messageAsString = messageData.content.toString();
-          const { url, screenshotIdentifier: identifier } = JSON.parse(messageAsString);
+          const { url, screenshotIdentifier: identifier } = JSON.parse(
+            messageAsString,
+          );
           const result = await ScreenshotHelpers.snapWebsite(url);
           const link = await ImageService.upload(result, url);
           if (!link) return;
           const name = `${url}-${generateRandomString()}`;
-          await ScreenShotRepository.create({
+          const screenShot = await ScreenShotRepository.create({
             name,
             link,
             identifier: identifier,
           });
+          await ImageService.setInRedis(url, screenShot.link);
           channel.ack(messageData);
           return;
         } catch (error) {
