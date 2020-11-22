@@ -5,6 +5,8 @@ import ResponseHandler from '../util/response-handler';
 import * as ScreenshotHelpers from '../helpers/screenshot';
 import ImageService from '../services/ImageService';
 import { generateRandomString } from '../util/generate-random-string';
+import RabbitmqService from '../services/RabbitmqService';
+import { QUEUES } from '../config/constants';
 
 export async function snapWebsite(
   req: ExpressRequest,
@@ -18,9 +20,10 @@ export async function snapWebsite(
   } = req.body;
 
   try {
-    const result = await ScreenshotHelpers.snapWebsite(url);
-    const link = await ImageService.upload(result, url);
-    return ResponseHandler.sendSuccessResponse({ res, data: { link } });
+    const screenshotIdentifier = generateRandomString();
+    // const result = await ScreenshotHelpers.snapWebsite(url);
+    // const link = await ImageService.upload(result, url);
+    return ResponseHandler.sendSuccessResponse({ res, data: { screenshotIdentifier } });
   } catch (error) {
     return next(error);
   }
