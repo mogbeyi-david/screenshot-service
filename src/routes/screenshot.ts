@@ -4,5 +4,7 @@ import * as ScreenShotController from '../controller/screenshot';
 
 // snap website
 router.post('/snap', ScreenShotController.snapWebsite);
+//Get screenshot by Identifier
+router.get('/:identifier', ScreenShotController.getByIdentifier);
 
 export default router;
