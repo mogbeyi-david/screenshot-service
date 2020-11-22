@@ -14,7 +14,7 @@ describe('POST /screenshots/snap', () => {
     const payload = {
       url: 'https://google.com',
     };
-    const response = await request(app).post('/screenshots/snap').send(payload);
+    const response = await request(app).post('/screenshots').send(payload);
     expect(response.status).toBe(200);
   });
 
@@ -22,7 +22,7 @@ describe('POST /screenshots/snap', () => {
     const payload = {
       url: 'hello-world',
     };
-    const response = await request(app).post('/screenshots/snap').send(payload);
+    const response = await request(app).post('/screenshots').send(payload);
     expect(response.status).toBe(400);
   });
 
@@ -34,7 +34,7 @@ describe('POST /screenshots/snap', () => {
     });
     const url = 'http://medium.com';
     await ImageService.setInRedis(url, screenShot.link);
-    const response = await request(app).post('/screenshots/snap').send({ url });
+    const response = await request(app).post('/screenshots').send({ url });
     expect(response.status).toBe(200);
     expect(response.body.message).toContain('cache');
   });

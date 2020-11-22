@@ -5,10 +5,13 @@ import { NextFunction, Response } from 'express';
 import morgan from 'morgan';
 import ResponseHandler from './util/response-handler';
 import { ExpressRequest } from './util/express';
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('../swagger.json');
 
 import screenshot from './routes/screenshot';
 
 const app = express();
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(morgan('combined'));
 app.use(cors());

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "export NODE_ENV=test && jest --verbose --coverage",
-    "start": "concurrently \" ts-node src/app.ts\" \"ts-node src/consumers/index.ts\" --kill-others",
+    "start": "concurrently \" ts-node src/index.ts\" \"ts-node src/consumers/index.ts\" --kill-others",
     "build": "tsc"
   },
   "keywords": [],
@@ -28,6 +28,7 @@
     "pm2": "^4.5.0",
     "redis": "^3.0.2",
     "supertest": "^6.0.1",
+    "swagger-ui-express": "^4.1.5",
     "winston": "^3.3.3"
   },
   "devDependencies": {

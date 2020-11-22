@@ -6,7 +6,7 @@ import * as ScreenShotValidation from '../validations/screenshot';
 
 // snap website
 router.post(
-  '/snap',
+  '/',
   ScreenShotValidation.validateSnapScreenshot,
   ScreenShotMiddleware.checkInRedis,
   ScreenShotController.snapWebsite,

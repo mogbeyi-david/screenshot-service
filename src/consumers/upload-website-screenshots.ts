@@ -14,7 +14,7 @@ export default async function uploadWebsiteScreenShots(): Promise<void> {
     await channel.assertQueue(QUEUES.UPLOAD_SCREENSHOTS, { durable: true });
 
     await channel.prefetch(1);
-    logger.info('uploadWebsiteScreenShots Queue Is Ready');
+    logger.info('Upload Website Screenshots Queue Is Ready');
     await channel.consume(
       QUEUES.UPLOAD_SCREENSHOTS,
       async (messageData: any) => {
