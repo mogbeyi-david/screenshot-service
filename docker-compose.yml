@@ -1,21 +1,18 @@
 version: '3.7'
 
 services:
-  redis:
-    image: redis
-    ports:
-      - 6379:6379
 
-  rabbitmq3:
-    image: rabbitmq:3-management
-    environment:
-      RABBITMQ_ERLANG_COOKIE: 'secret cookie here'
-    volumes:
-      - ./db-data:/var/lib/rabbitmq
-
-  mongodb:
-    image: mongo:latest
+  api:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
     ports:
-      - 27017:27017
-    volumes:
-      - data:/data/db
+      - 3000:3000
+    networks:
+      valiu-network:
+
+networks:
+  valiu-network:
+
+volumes:
+  data:
