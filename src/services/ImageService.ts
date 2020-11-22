@@ -24,10 +24,8 @@ class ImageService {
     url: string,
     screenshot: string,
     duration: number = TIME_VALUES_IN_MILLISECONDS.TWELVE_HOURS,
-  ) {
-    const redisResponse = await redisAsync.set(url, screenshot, 'EX', duration);
-    console.log('redisResponse', redisResponse);
-    return redisResponse;
+  ): Promise<{}> {
+    return await redisAsync.set(url, screenshot, 'EX', duration);
   }
 }
 
