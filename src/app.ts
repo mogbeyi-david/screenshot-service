@@ -25,6 +25,14 @@ app.get('/', async (req: ExpressRequest, res: Response) => {
   });
 });
 
+app.get(
+  '/test-failure',
+  async (req: ExpressRequest, res: Response, next: NextFunction) => {
+    const error = new Error('Error handling middleware works');
+    return next(error);
+  },
+);
+
 app.use((req: ExpressRequest, res: Response) => {
   return ResponseHandler.sendErrorResponse({ res, error: 'Route not found' });
 });

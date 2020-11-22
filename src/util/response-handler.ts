@@ -42,9 +42,6 @@ class ResponseHandler {
     res: Response;
     error: any;
   }) {
-    logger.error(error);
-    logger.error(error.message);
-    logger.error(error.stack);
     return res.status(500).send({
       success: false,
       error: 'Internal server error',

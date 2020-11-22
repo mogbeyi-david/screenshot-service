@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "export NODE_ENV=test && npm run db:up &&jest --verbose --coverage --detectOpenHandles",
+    "test": "export NODE_ENV=test && jest --verbose --coverage",
     "start": "ts-node src/index.ts",
     "build": "tsc"
   },

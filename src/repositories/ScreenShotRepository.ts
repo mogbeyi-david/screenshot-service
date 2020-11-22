@@ -20,6 +20,10 @@ class ScreenShotRepository {
   ): Promise<IScreenShot | null> {
     return Screenshot.findOne({ identifier }).lean(leanVersion);
   }
+
+  public async deleteAll(){
+    return Screenshot.deleteMany({});
+  }
 }
 
 export default new ScreenShotRepository();
