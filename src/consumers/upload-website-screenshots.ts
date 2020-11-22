@@ -24,7 +24,7 @@ export default async function uploadWebsiteScreenShots(): Promise<void> {
           const link = await ImageService.upload(result, url);
           if (!link) return;
           const name = `${url}-${generateRandomString()}`;
-          const screenShot = await ScreenShotRepository.create({
+          await ScreenShotRepository.create({
             name,
             link,
             identifier: identifier,

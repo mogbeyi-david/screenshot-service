@@ -44,3 +44,9 @@ export const MONGO_URL =
         throwIfUndefined(process.env.MONGO_URL_TEST, 'MONGO_URL_TEST'),
       )
     : throwIfUndefined(process.env.MONGO_URL, 'MONGO_URL');
+
+
+export const REDIS_URL =
+    NODE_ENV === 'test'
+        ? throwIfUndefined(process.env.REDIS_URL_TEST, 'REDIS_URL_TEST')
+        : throwIfUndefined(process.env.REDIS_URL, 'REDIS_URL');
