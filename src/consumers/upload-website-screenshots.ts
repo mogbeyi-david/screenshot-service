@@ -22,28 +22,26 @@ export default async function uploadWebsiteScreenShots(): Promise<void> {
     await channel.consume(
       QUEUES.UPLOAD_SCREENSHOTS,
       async (message: UploadScreenshotType) => {
-        if (message !== null) {
-          try {
-            const { url, screenshotIdentifier: identifier } = message;
-            const result = await ScreenshotHelpers.snapWebsite(url);
-            const link = await ImageService.upload(result, url);
-            if (link) {
-              const name = `${link}-${generateRandomString()}`;
-              await ScreenShotRepository.create({
-                name,
-                link,
-                identifier: identifier,
-              });
-            }
-            channel.ack(message);
-            return;
-          } catch (error) {
-            logger.error({
-              message: error.toString(),
-              id: new Date(),
-            });
-            channel.ack(message);
-          }
+        if (!message !== null) return;
+        try {
+          const { url, screenshotIdentifier: identifier } = message;
+          const result = await ScreenshotHelpers.snapWebsite(url);
+          const link = await ImageService.upload(result, url);
+          if (!link) return;
+          const name = `${link}-${generateRandomString()}`;
+          await ScreenShotRepository.create({
+            name,
+            link,
+            identifier: identifier,
+          });
+          channel.ack(message);
+          return;
+        } catch (error) {
+          logger.error({
+            message: error.toString(),
+            id: new Date(),
+          });
+          channel.ack(message);
         }
       },
       { noAck: false },
