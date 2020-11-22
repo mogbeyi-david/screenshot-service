@@ -2,9 +2,8 @@ module.exports = {
   apps: [
     {
       name: 'VALIU-API',
-      // script: './node_modules/.bin/ts-node',
-      script: 'ts-node',
-      args: 'src/index.ts',
+      script: 'node',
+      args: 'dist/index.js',
       instances: 1,
       autorestart: true,
       watch: false,
@@ -12,9 +11,8 @@ module.exports = {
     },
     {
       name: 'VALIU-CONSUMER',
-      // script: './node_modules/.bin/ts-node',
-      script: 'ts-node',
-      args: 'src/consumers/index.ts',
+      script: 'node',
+      args: 'dist/consumers/index.js',
       instances: 1,
       autorestart: true,
       watch: false,

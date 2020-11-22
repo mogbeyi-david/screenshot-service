@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "export NODE_ENV=test && npm run db:up &&jest --verbose --coverage --detectOpenHandles",
-    "start": "ts-node src/index.ts"
+    "start": "ts-node src/index.ts",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",

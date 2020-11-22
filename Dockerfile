@@ -1,12 +1,21 @@
-FROM node:latest
-WORKDIR /src
+FROM node
+
+WORKDIR /usr/app
+COPY package*.json ./
+
 RUN npm install -g pm2
+RUN npm install -g typescript
 RUN pm2 install typescript
-RUN npm install -g ts-node
 RUN npm install
-COPY ecosystem.config.js ./ecosystem.config.js
-COPY package.json ./package.json
-COPY package-lock.json ./package-lock.json
-COPY .env ./.env
-ADD ./src/ /src/
-CMD ["pm2", "start", "ecosystem.config.js"]
+
+# Bundle app source
+COPY . .
+
+# for typescript
+RUN npm run build
+COPY .env ./dist/
+COPY ecosystem.config.js ./dist/
+WORKDIR ./dist
+
+EXPOSE 3003
+CMD ["node", "index.js", "&", "node", "consumers/index.js"]
