@@ -6,11 +6,6 @@ import * as ScreenshotHelpers from '../helpers/screenshot';
 import ScreenShotRepository from '../repositories/ScreenShotRepository';
 import { generateRandomString } from '../util/generate-random-string';
 
-type UploadScreenshotType = {
-  url: string;
-  screenshotIdentifier: string;
-};
-
 export default async function uploadWebsiteScreenShots(): Promise<void> {
   try {
     const connection = await require('amqplib').connect(AMQP_CLIENT);
@@ -21,27 +16,27 @@ export default async function uploadWebsiteScreenShots(): Promise<void> {
     await channel.prefetch(1);
     await channel.consume(
       QUEUES.UPLOAD_SCREENSHOTS,
-      async (message: UploadScreenshotType) => {
-        if (!message !== null) return;
+      async (messageData: any) => {
         try {
-          const { url, screenshotIdentifier: identifier } = message;
+          const messageAsString = messageData.content.toString();
+          const { url, screenshotIdentifier: identifier } = JSON.parse(messageAsString);
           const result = await ScreenshotHelpers.snapWebsite(url);
           const link = await ImageService.upload(result, url);
           if (!link) return;
-          const name = `${link}-${generateRandomString()}`;
-          await ScreenShotRepository.create({
+          const name = `${url}-${generateRandomString()}`;
+          const screenShot = await ScreenShotRepository.create({
             name,
             link,
             identifier: identifier,
           });
-          channel.ack(message);
+          channel.ack(messageData);
           return;
         } catch (error) {
           logger.error({
             message: error.toString(),
             id: new Date(),
           });
-          channel.ack(message);
+          channel.ack(messageData);
         }
       },
       { noAck: false },
