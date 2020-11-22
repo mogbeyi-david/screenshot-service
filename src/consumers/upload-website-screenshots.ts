@@ -31,7 +31,7 @@ export default async function uploadWebsiteScreenShots(): Promise<void> {
             link,
             identifier: identifier,
           });
-          logger.data(`screenShot ${screenShot}`);
+          logger.info(`screenShot ${screenShot}`);
           await ImageService.setInRedis(url, screenShot.link);
           channel.ack(messageData);
           return;
