@@ -27,7 +27,7 @@ $ npm install
 
 
 This service uploads images to S3 bucket, so we need to get AWS IAM credentials.
-Please log in to your AWS console to generate credentials and create a s3 bucket.
+Please log in to your [AWS console](https://console.aws.amazon.com/) to generate credentials and create a s3 bucket.
 
 Fill in the values of the following environment variables with the credentials you
 generated, and the s3 bucket name
