@@ -69,7 +69,7 @@ npm start
 You can follow the link to the API docs displayed on the console for how to 
 use the API.
 
-Please visit [here](https://www.notion.so/System-Architecture-and-Suggestion-for-Improvement-374c51dd3aff4307a397435b246211ad) for explanation of the system architecture, suggestions for improvements and other ways the system can also be successfully implemented
+Please visit [here](https://www.notion.so/System-Architecture-and-other-Possible-Implementations-374c51dd3aff4307a397435b246211ad) for explanation of the system architecture, suggestions for improvements and other ways the system can also be successfully implemented
 
 ### npm test
 
