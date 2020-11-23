@@ -80,4 +80,4 @@ This command:
 - runs `jest --coverage --verbose` for testing with [Jest](https://github.com/facebook/jest) and the coverage
 - drops the `test database` after the test
 
-![Image showing test coverage](https://ibb.co/RpxFb5P)
+[![image](https://www.linkpicture.com/q/Screenshot-2020-11-23-at-12.09.49-PM.png)](https://www.linkpicture.com/view.php?img=LPic5fbb9ade5715f595509875)
