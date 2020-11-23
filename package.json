@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "export NODE_ENV=test && jest --verbose --coverage",
-    "start": "concurrently \" ts-node src/index.ts\" \"ts-node src/consumers/index.ts\" --kill-others",
+    "start": "concurrently \"ts-node src/index.ts\" \"ts-node src/consumers/index.ts\" --kill-others",
     "build": "tsc"
   },
   "keywords": [],

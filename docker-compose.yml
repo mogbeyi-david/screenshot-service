@@ -1,15 +1,15 @@
 version: '3.7'
-
 services:
   redis:
     image: redis
+    container_name: redis
     ports:
       - 6379:6379
     networks:
       valiu-network:
-
   rabbitmq3:
     image: rabbitmq:3-management
+    container_name: rabbitmq3
     ports:
       - 15672:15672
     environment:
@@ -18,27 +18,33 @@ services:
       - data:/var/lib/rabbitmq
     networks:
       valiu-network:
-
-  mongodb:
+  mongo:
     image: mongo:latest
+    container_name: mongo
     ports:
       - 27017:27017
     volumes:
       - data:/data/db
-    networks:
-      valiu-network:
-
   api:
     build:
       context: .
       dockerfile: ./Dockerfile
     ports:
       - 3004:3004
+    links:
+      - redis
+      - mongo
+      - rabbitmq3
+    depends_on:
+      - rabbitmq3
+      - redis
+      - mongo
+    restart: always
+    env_file:
+      - .env
     networks:
       valiu-network:
-
 networks:
   valiu-network:
-
 volumes:
   data:
