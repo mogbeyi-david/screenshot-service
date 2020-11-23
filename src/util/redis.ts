@@ -3,7 +3,7 @@ import util from 'util';
 import * as config from '../config/env';
 import { logger } from './logger';
 
-export const redisClient = redis.createClient({ host: 'redis' });
+export const redisClient = redis.createClient(config.REDIS_URL);
 
 redisClient.on('connect', () => {
   logger.info('Connected to Redis!');
