@@ -3,7 +3,7 @@
   "info": {
     "description": "An API that takes the url of a website and takes screenshots of the homepage",
     "version": "1.0.0",
-    "title": "Website Grabber",
+    "title": "Screenshot Service",
     "contact": {
       "email": "mogbeyidavid@gmail.com"
     },

@@ -1,4 +1,4 @@
-# Website Grabber
+# Screenshot Service
 > API that takes screenshots of website and returns link to screenshots
 
 ## Install and Use
