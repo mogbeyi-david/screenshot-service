@@ -81,3 +81,6 @@ This command:
 - drops the `test database` after the test
 
 [![image](https://www.linkpicture.com/q/Screenshot-2020-11-23-at-12.09.49-PM.png)](https://www.linkpicture.com/view.php?img=LPic5fbb9ade5715f595509875)
+
+### System Architecture
+[![image](https://www.linkpicture.com/q/system-architecture.png)](https://www.linkpicture.com/view.php?img=LPic5fbba26e02b651798896088)
