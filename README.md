@@ -27,7 +27,9 @@ $ npm install
 
 
 This service uploads images to S3 bucket, so we need to get AWS IAM credentials.
-Please log in to your [AWS console](https://console.aws.amazon.com/) to generate credentials and create a s3 bucket.
+Please log in to your [AWS console](https://console.aws.amazon.com/) to generate credentials 
+and create a publicly accessible s3 bucket.
+
 
 Fill in the values of the following environment variables with the credentials you
 generated, and the s3 bucket name
@@ -65,4 +67,7 @@ npm start
 ```
 
 You can follow the link to the API docs displayed on the console for how to 
-use the API
+use the API.
+
+Please visit [here](https://www.notion.so/System-Architecture-and-Suggestion-for-Improvement-374c51dd3aff4307a397435b246211ad) for explanation of the system architecture, suggestions for improvements and other ways the system can also be successfully implemented
+
