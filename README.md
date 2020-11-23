@@ -6,15 +6,22 @@
 Start by cloning this repository
 
 ```sh
-# HTTPS
-$ git clone https://github.com/mogbeyi-david/website-grabber-service.git
+$ git clone https://github.com/mogbeyi-david/screenshot-service.git
+```
+
+Change into the repository folder
+```sh
+$ cd screenshot-service
 ```
 
 Copy the environment variables
 
 ```sh
-$ cd website-grabber-service
 $ cp .env.example .env
+```
+
+Install dependencies
+```sh
 $ npm install
 ```
 
