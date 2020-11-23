@@ -25,6 +25,19 @@ Install dependencies
 $ npm install
 ```
 
+
+This service uploads images to S3 bucket, so we need to get AWS IAM credentials.
+Please log in to your AWS console to generate credentials and create a s3 bucket.
+
+Fill in the values of the following environment variables with the credentials you
+generated, and the s3 bucket name
+
+```sh
+AWS_SECRET_ACCESS_KEY=
+AWS_ACCESS_KEY_ID=
+S3_BUCKET_NAME=
+```
+
 This service uses [RabbitMQ](https://www.rabbitmq.com/) as a messaging queue technology and 
 [Redis](https://redis.io/) as the caching technology and [MongoDB](https://www.mongodb.com/) as the database management system
 
@@ -44,18 +57,6 @@ When the containers have started, please run the following command to start the 
 
 ```sh
 redis-server
-```
-
-This service uploads images to S3 bucket, so we need to get AWS IAM credentials.
-Please log in to your AWS console to generate credentials and create a s3 bucket.
-
-Fill in the values of the following environment variables with the credentials you
-generated, and the s3 bucket name
-
-```sh
-AWS_SECRET_ACCESS_KEY=
-AWS_ACCESS_KEY_ID=
-S3_BUCKET_NAME=
 ```
 
 Then start the API
