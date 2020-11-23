@@ -71,3 +71,13 @@ use the API.
 
 Please visit [here](https://www.notion.so/System-Architecture-and-Suggestion-for-Improvement-374c51dd3aff4307a397435b246211ad) for explanation of the system architecture, suggestions for improvements and other ways the system can also be successfully implemented
 
+### npm test
+
+This command:
+
+- sets the **environment variable** `NODE_ENV` to `test`
+- creates the `test database`
+- runs `jest --coverage --verbose` for testing with [Jest](https://github.com/facebook/jest) and the coverage
+- drops the `test database` after the test
+
+![Image showing test coverage](https://ibb.co/RpxFb5P)
