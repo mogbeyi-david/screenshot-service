@@ -8,7 +8,7 @@ dotenv.config({ path: `${appRootPath.path}/.env` });
 
 export const APP_PORT = throwIfUndefined(process.env.APP_PORT, 'APP_PORT');
 
-export const MOCK_MODE = throwIfUndefined(process.env.MOCK_MODE, 'MOCK_MODE');
+export const MOCK_MODE = throwIfUndefined(!!Number(process.env.MOCK_MODE), 'MOCK_MODE');
 
 export const AWS_ACCESS_KEY_ID = throwIfUndefined(
   process.env.AWS_ACCESS_KEY_ID,
